@@ -1,31 +1,10 @@
 {
-  "Bahasa": {
-    "Inggris-Indonesia": ["Kosakata Kata Kerja", "Kosakata Kata Benda", "Grammar Tenses", "Idiom Sehari-hari", "Percakapan Formal", "Percakapan Informal", "Frasa Bisnis"],
-    "Jepang-Indonesia": ["Hiragana", "Katakana", "Kanji Dasar", "Partikel Wa-Ga-Wo", "Percakapan Formal", "Kata Kerja Bentuk -Masu", "Budaya & Etika"],
-    "Mandarin-Indonesia": ["Pinyin & Nada", "Hanzi Dasar", "Tata Bahasa Dasar", "Percakapan Sehari-hari", "Angka & Waktu"],
-    "Arab-Indonesia": ["Kosakata Nahwu", "Kosakata Sharaf", "Percakapan Formal", "Istilah Agama", "Kata Kerja Fi'il"],
-    "Korea-Indonesia": ["Hangul Dasar", "Kosakata Sehari-hari", "Tata Bahasa Dasar", "Percakapan Formal", "Budaya Korea"]
-  },
   "Pemrograman": {
-    "Kotlin": ["Variabel & Tipe Data", "Fungsi", "Class & Object", "Inheritance", "Coroutines", "Flow", "ViewModel", "Repository Pattern", "Compose UI", "Koleksi List-Map"],
-    "XML Android": ["Layout LinearLayout", "Layout ConstraintLayout", "TextView", "Button", "RecyclerView", "CardView", "Selector & Shape"],
-    "HTML": ["Struktur Dasar", "Tag Heading", "Tag Paragraf", "Form", "Tabel", "Semantic HTML", "Meta Tag"],
-    "CSS": ["Selector", "Flexbox", "Grid", "Color & Background", "Animation", "Media Query"],
-    "JavaScript": ["Variable & Let/Const", "Function", "DOM Manipulation", "Event Listener", "Async-Await", "Fetch API"],
-    "Python": ["Variable", "List & Dict", "Function", "Class", "Library Pandas", "Library NumPy", "File I/O"],
-    "Java": ["OOP Dasar", "Interface", "Exception Handling", "Collection Framework", "Threading"]
+    "Kotlin": ["Variabel", "Fungsi", "Class", "Coroutines"],
+    "HTML": ["Struktur Dasar", "Form", "Tabel"]
   },
   "Agama": {
-    "Hadits Arab": ["Hadits Tentang Niat", "Hadits Tentang Sabar", "Hadits Tentang Iman", "Hadits Tentang Akhlak", "Hadits Tentang Rezeki", "Hadits Tentang Ilmu"],
-    "Hadits Inggris": ["Hadith on Intention", "Hadith on Patience", "Hadith on Faith", "Hadith on Manners", "Hadith on Knowledge"],
-    "Fiqih": ["Thaharah", "Shalat", "Zakat", "Puasa", "Haji", "Muamalah"],
-    "Quran": ["Tafsir Juz 30", "Tajwid Dasar", "Asbabun Nuzul", "Kisah Para Nabi"]
-  },
-  "Umum": {
-    "Sains": ["Fisika Dasar", "Kimia Dasar", "Biologi Sel", "Astronomi", "Ekologi"],
-    "Sejarah": ["Sejarah Indonesia", "Sejarah Islam", "Sejarah Dunia", "Perang Dunia"],
-    "Matematika": ["Aljabar", "Geometri", "Trigonometri", "Kalkulus", "Statistika"],
-    "Kesehatan": ["Nutrisi", "Olahraga", "Penyakit Umum", "Pertolongan Pertama"],
-    "Kecerdasan Buatan": ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "LLM"]
+    "Hadits Arab": ["Hadits Niat", "Hadits Sabar"],
+    "Hadits Inggris": ["Hadith Intention", "Hadith Patience"]
   }
 }
