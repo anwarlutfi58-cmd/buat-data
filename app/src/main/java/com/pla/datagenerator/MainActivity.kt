@@ -36,8 +36,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        try {
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error Layout: ${e.message}", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
 
         muatKatalog()
 
@@ -46,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             val manual = binding.edtManual.text.toString().trim()
             val jumlah = binding.edtJumlah.text.toString().toIntOrNull() ?: 50
 
-            // Prioritas: Manual (jika diisi), kalau tidak pakai dropdown
             val topikFinal = if (manual.isNotEmpty()) {
                 manual
             } else {
@@ -56,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 "$kategori $sub - $detail"
             }
 
-            if (apiKey.isEmpty() || topikFinal.isEmpty()) {
+            if (apiKey.isEmpty() || topikFinal.isEmpty() || topikFinal == "  - ") {
                 Toast.makeText(this, "Isi API Key dan Topik!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -82,47 +87,61 @@ class MainActivity : AppCompatActivity() {
 
     private fun muatKatalog() {
         try {
+            // Membaca file dari folder assets
             val jsonString = assets.open("katalog_topik.json").bufferedReader().use { it.readText() }
             katalog = JSONObject(jsonString)
 
-            // Setup Spinner Kategori
             val kategoriList = mutableListOf<String>()
             katalog.keys().forEach { kategoriList.add(it) }
+
+            if (kategoriList.isEmpty()) {
+                Toast.makeText(this, "Katalog JSON kosong.", Toast.LENGTH_SHORT).show()
+                return
+            }
 
             val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, kategoriList)
             binding.spinnerKategori.adapter = adapter1
 
             binding.spinnerKategori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                    val katTerpilih = kategoriList[position]
-                    val subObj = katalog.getJSONObject(katTerpilih)
-                    
-                    currentSubKategoriList = subObj.keys().asSequence().toList()
-                    val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
-                    binding.spinnerSub.adapter = adapter2
+                    try {
+                        val katTerpilih = kategoriList[position]
+                        val subObj = katalog.getJSONObject(katTerpilih)
+                        
+                        currentSubKategoriList = subObj.keys().asSequence().toList()
+                        val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
+                        binding.spinnerSub.adapter = adapter2
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-            // Setup Spinner Sub-Kategori
             binding.spinnerSub.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                    if (position >= 0 && position < currentSubKategoriList.size) {
-                        val katTerpilih = binding.spinnerKategori.selectedItem.toString()
-                        val subTerpilih = currentSubKategoriList[position]
-                        
-                        val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
-                        currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
-                        
-                        val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
-                        binding.spinnerDetail.adapter = adapter3
+                    try {
+                        if (position >= 0 && position < currentSubKategoriList.size) {
+                            val katTerpilih = binding.spinnerKategori.selectedItem.toString()
+                            val subTerpilih = currentSubKategoriList[position]
+                            
+                            val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
+                            currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
+                            
+                            val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
+                            binding.spinnerDetail.adapter = adapter3
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
         } catch (e: Exception) {
-            Toast.makeText(this, "Gagal memuat katalog: ${e.message}", Toast.LENGTH_LONG).show()
+            // Jika file tidak ketemu atau format salah, aplikasi TIDAK akan crash.
+            Toast.makeText(this, "Gagal memuat katalog. Pastikan file JSON ada di folder assets.", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
         }
     }
 
