@@ -13,18 +13,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pabrik Data AI (v2.0)"
+            android:text="Pabrik Data AI (v3.0 Pro)"
             android:textColor="#4CAF50"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
         <TextView
+            android:id="@+id/tvStatistik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pilih dari Katalog atau ketik manual."
-            android:textColor="#AAAAAA"
-            android:layout_marginBottom="24dp" />
+            android:text="Total data terkumpul: 0 pasang tanya-jawab"
+            android:textColor="#FFC107"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
 
         <EditText
             android:id="@+id/edtApiKey"
@@ -34,6 +36,14 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#777777"
             android:backgroundTint="#4CAF50"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnHapusKey"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Hapus API Key Tersimpan"
+            android:textSize="12sp"
             android:layout_marginBottom="16dp" />
 
         <TextView
@@ -42,6 +52,7 @@
             android:text="1. Pilih Kategori Utama:"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="4dp" />
+
         <Spinner
             android:id="@+id/spinnerKategori"
             android:layout_width="match_parent"
@@ -55,6 +66,7 @@
             android:text="2. Pilih Sub-Kategori:"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="4dp" />
+
         <Spinner
             android:id="@+id/spinnerSub"
             android:layout_width="match_parent"
@@ -68,6 +80,7 @@
             android:text="3. Pilih Detail Topik:"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="4dp" />
+
         <Spinner
             android:id="@+id/spinnerDetail"
             android:layout_width="match_parent"
@@ -81,6 +94,7 @@
             android:text="Atau Ketik Topik Manual (opsional):"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="4dp" />
+
         <EditText
             android:id="@+id/edtManual"
             android:layout_width="match_parent"
@@ -94,9 +108,38 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jumlah Baris Data:"
+            android:text="Gaya Jawaban:"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinnerGaya"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bahasa Output:"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinnerBahasa"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jumlah Baris Data (1-300):"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
+
         <EditText
             android:id="@+id/edtJumlah"
             android:layout_width="match_parent"
@@ -105,13 +148,40 @@
             android:text="50"
             android:textColor="#FFFFFF"
             android:backgroundTint="#4CAF50"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="16dp" />
+
+        <CheckBox
+            android:id="@+id/chkBatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mode Batch (generate semua detail di sub-kategori ini)"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#4CAF50"
+            android:layout_marginBottom="8dp" />
+
+        <CheckBox
+            android:id="@+id/chkAppend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gabung ke satu file induk (dataset_ai.json)"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#4CAF50"
+            android:checked="true"
+            android:layout_marginBottom="16dp" />
 
         <Button
             android:id="@+id/btnGenerate"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Generate &amp; Simpan JSON" />
+            android:text="Generate &amp; Simpan" />
+
+        <Button
+            android:id="@+id/btnSalin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Salin Hasil Terakhir ke Clipboard"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/tvStatus"
@@ -122,6 +192,25 @@
             android:textSize="14sp"
             android:gravity="center"
             android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preview Hasil:"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(belum ada hasil)"
+            android:textColor="#CCCCCC"
+            android:textSize="12sp"
+            android:background="#1E1E1E"
+            android:padding="12dp"
+            android:layout_marginTop="4dp" />
 
     </LinearLayout>
 </ScrollView>
