@@ -1,6 +1,7 @@
 package com.pla.datagenerator
 
 import android.content.ContentValues
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -39,7 +40,11 @@ class MainActivity : AppCompatActivity() {
     private var currentSubKategoriList: List<String> = emptyList()
     private var currentDetailList: List<String> = emptyList()
 
-    // Daftar inti untuk diperluas otomatis menjadi ratusan pilihan
+    // NAMA FILE UNTUK SIMPAN API KEY (otomatis)
+    private val PREFS_NAME = "AppPrefs"
+    private val KEY_API = "api_key_tersimpan"
+
+    // Daftar inti untuk diperluas otomatis jadi ratusan pilihan
     private val daftarInti = listOf(
         "Matematika", "Fisika", "Kimia", "Biologi", "Astronomi", "Geografi",
         "Sejarah Indonesia", "Sejarah Dunia", "Pancasila", "Ekonomi", "Akuntansi",
@@ -74,6 +79,9 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        // MUAT API KEY YANG TERSIMPAN (kalau ada)
+        muatApiKeyTersimpan()
+
         try {
             muatKatalog()
         } catch (e: Exception) {
@@ -86,7 +94,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Memperluas daftar inti jadi ratusan pilihan: "X", "X - Dasar", "X - Menengah", ...
+    // FUNGSI UNTUK MEMUAT API KEY DARI PENYIMPANAN PERMANEN
+    private fun muatApiKeyTersimpan() {
+        try {
+            val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val apiKeyTersimpan = prefs.getString(KEY_API, "")
+            if (!apiKeyTersimpan.isNullOrEmpty()) {
+                binding?.edtApiKey?.setText(apiKeyTersimpan)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    // FUNGSI UNTUK MENYIMPAN API KEY KE PENYIMPANAN PERMANEN
+    private fun simpanApiKey(apiKey: String) {
+        try {
+            val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putString(KEY_API, apiKey).apply()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun perluasDaftar(inti: List<String>): List<String> {
         val hasil = mutableListOf<String>()
         val variasi = listOf("", "Dasar", "Menengah", "Lanjutan", "Contoh Soal", "Istilah Penting", "Tokoh dan Sejarah")
@@ -117,6 +147,9 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        // SIMPAN API KEY SEBELUM GENERATE (biar nggak hilang)
+        simpanApiKey(apiKey)
+
         binding?.btnGenerate?.isEnabled = false
         binding?.tvStatus?.text = "Menghubungi Gemini...\nTopik: $topikFinal\nJumlah: $jumlah tanya-jawab"
 
@@ -139,7 +172,6 @@ class MainActivity : AppCompatActivity() {
         val jsonString = assets.open("katalog_topik.json").bufferedReader().use { it.readText() }
         katalog = JSONObject(jsonString)
 
-        // Spinner 1: kunci katalog + ratusan topik hasil perluasan
         val kategoriList = mutableListOf<String>()
         katalog.keys().forEach { kategoriList.add(it) }
         kategoriList.addAll(perluasDaftar(daftarInti))
@@ -157,11 +189,9 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val katTerpilih = kategoriList[position]
                     if (katalog.has(katTerpilih)) {
-                        // Pilihan dari file JSON
                         val subObj = katalog.getJSONObject(katTerpilih)
                         currentSubKategoriList = subObj.keys().asSequence().toList()
                     } else {
-                        // Pilihan hasil perluasan -> sub & detail dibuat otomatis
                         currentSubKategoriList = listOf("Umum", "Konsep", "Contoh", "Latihan")
                     }
                     val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
