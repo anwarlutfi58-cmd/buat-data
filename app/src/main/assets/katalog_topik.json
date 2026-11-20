@@ -251,4 +251,52 @@
     "Farmasi": ["Kimia Farmasi", "Farmakologi", "Farmasetika", "Farmakognosi", "Kimia Medisinal", "Analisis Farmasi", "Farmasi Klinis", "Farmakokinetik", "Teknologi Farmasi", "Obat Tradisional", "Kosmetik", "Regulasi Obat"],
     "Kesehatan Masyarakat": ["Epidemiologi", "Biostatistik", "Kesehatan Lingkungan", "Promosi Kesehatan", "Gizi Kesehatan Masyarakat", "Kesehatan dan Keselamatan Kerja", "Administrasi Kebijakan Kesehatan", "Manajemen Rumah Sakit"],
     "Desain dan Seni": ["Desain Komunikasi Visual", "Desain Interior", "Desain Produk", "Seni Rupa Murni", "Kriya", "Fotografi", "Animasi", "Film dan Televisi", "Musik", "Tari", "Teater", "Arsitektur", "Arsitektur Lanskap", "Perencanaan Wilayah dan Kota"]
+  },
+  "Pendidikan Vokasi D3 D4": {
+    "Akuntansi Terapan": ["Akuntansi Keuangan Menengah", "Perpajakan Terapan", "Sistem Informasi Akuntansi", "Audit Vokasi", "Akuntansi Sektor Publik"],
+    "Perhotelan dan Pariwisata": ["Front Office", "Housekeeping", "Food and Beverage", "Pemandu Wisata", "Manajemen Destinasi", "Ticketing"],
+    "Teknik Mesin Otomotif": ["Engine Tune Up", "Sistem Pemindah Tenaga", "Sistem Kelistrikan Otomotif", "EFI dan Common Rail", "Modifikasi Kendaraan"],
+    "Kesehatan Vokasi": ["Asuhan Kebidanan", "Keperawatan Medikal Bedah", "Keperawatan Gawat Darurat", "Farmasi Klinis Dasar", "Analis Kesehatan"],
+    "Administrasi dan Bisnis": ["Kesekretariatan", "Manajemen Perkantoran", "Ekspor Impor", "Perpajakan Terapan", "Humas dan Protokol"],
+    "Teknologi Terapan": ["Teknisi Jaringan", "Multimedia dan Animasi", "Teknologi Pengelasan", "Teknik Pendingin dan Tata Udara", "Mekatronika Dasar"],
+    "Kuliner dan Tata Boga": ["Pastry and Bakery", "Continental Cuisine", "Asian Cuisine", "Indonesian Cuisine", "Food Photography", "Manajemen Restoran"]
+  },
+  "Program Magister S2": {
+    "Magister Manajemen MM": ["Manajemen Strategik", "Perilaku Organisasi Lanjut", "Manajemen Pemasaran Strategik", "Manajemen Keuangan Korporat", "Metodologi Penelitian Bisnis"],
+    "Magister Hukum MH": ["Filsafat Hukum", "Hukum Perjanjian Lanjut", "Hukum Pidana Ekonomi", "Hukum Acara Perdata Lanjut", "Penyelesaian Sengketa Alternatif"],
+    "Magister Teknik": ["Manajemen Proyek Lanjut", "Sistem Cerdas", "Arsitektur Enterprise", "Keamanan Informasi Lanjut", "Rekayasa Keberlanjutan"],
+    "Magister Kesehatan": ["Epidemiologi Lanjut", "Manajemen Rumah Sakit", "Kebijakan Kesehatan", "Kedokteran Keluarga", "Bioteknologi Medis"],
+    "Magister Psikologi": ["Psikodiagnostik Lanjut", "Intervensi Psikologi Klinis", "Psikologi Industri Lanjut", "Asesmen Bakat Minat", "Konseling Lanjut"],
+    "Magister Ilmu Sosial": ["Teori Sosial Kontemporer", "Metode Penelitian Kualitatif Lanjut", "Analisis Kebijakan Publik", "Sosiologi Perkotaan"]
+  },
+  "Program Doktor S3": {
+    "Filsafat dan Metodologi": ["Filsafat Ilmu Pengetahuan", "Epistemologi", "Ontologi", "Aksiologi", "Metodologi Penelitian Campuran", "Logika Ilmiah"],
+    "Penulisan dan Publikasi": ["Strategi Publikasi Jurnal Internasional", "Manajemen Sitasi", "Etika Publikasi Ilmiah", "Penulisan Disertasi", "Review Jurnal Bereputasi"],
+    "Doktor Ilmu Komputer": ["Teori Komputasi Lanjut", "Algoritma Kuantum", "Arsitektur Sistem Terdistribusi Lanjut", "Seminar Riset AI"],
+    "Doktor Ilmu Ekonomi": ["Ekonomi Makro Lanjut", "Ekonometrika Spasial", "Teori Permainan Lanjut", "Seminar Riset Keuangan"],
+    "Doktor Ilmu Hukum": ["Teori Hukum Kontemporer", "Hukum Transnasional", "Perbandingan Sistem Hukum", "Seminar Riset Hukum"]
+  },
+  "Kurikulum S1 Per Semester": {
+    "Semester 1 Dasar": ["Pancasila", "Agama", "Bahasa Inggris", "Kalkulus 1", "Pengantar Ilmu Komputer", "Fisika Dasar", "Olahraga"],
+    "Semester 2 Keilmuan": ["Kalkulus 2", "Algoritma dan Pemrograman", "Aljabar Linear", "Fisika Lanjut", "Bahasa Indonesia", "Pengantar Ekonomi"],
+    "Semester 3 Inti Awal": ["Struktur Data", "Basis Data", "Matematika Diskrit", "Statistika Probabilitas", "Organisasi Komputer", "Pancasila Lanjut"],
+    "Semester 4 Inti Lanjut": ["Rekayasa Perangkat Lunak", "Jaringan Komputer", "Sistem Operasi", "Interaksi Manusia Komputer", "Kewirausahaan", "Metode Numerik"],
+    "Semester 5 Peminatan": ["Kecerdasan Buatan", "Pemrograman Web Lanjut", "Keamanan Informasi", "Pemrograman Mobile", "Manajemen Proyek IT", "Etika Profesi"],
+    "Semester 6 Aplikasi": ["Proyek Perangkat Lunak", "Machine Learning", "Komputasi Awan", "Magang Industri", "Kerja Praktik", "Kapita Selekta"],
+    "Semester 7 Persiapan": ["Metodologi Penelitian", "Seminar Proposal", "Pilihan Bebas", "Kuliah Pengabdian Masyarakat"],
+    "Semester 8 Akhir": ["Skripsi", "Pendadaran", "Publikasi Ilmiah", "Wisuda"]
+  },
+  "Topik Skripsi dan Tesis": {
+    "Skripsi Informatika": ["Penerapan Deep Learning untuk Deteksi Penyakit", "Sistem Rekomendasi E-Commerce dengan Collaborative Filtering", "Aplikasi IoT untuk Smart Home", "Analisis Sentimen Media Sosial dengan NLP", "Keamanan Blockchain untuk Transaksi"],
+    "Skripsi Ekonomi Bisnis": ["Pengaruh Influencer Marketing terhadap Keputusan Pembelian", "Analisis Faktor yang Mempengaruhi Kinerja Keuangan UMKM", "Strategi Retensi Karyawan di Era Digital", "Dampak ESG terhadap Nilai Perusahaan"],
+    "Skripsi Hukum": ["Perlindungan Data Pribadi dalam Transaksi Fintech", "Tinjauan Yuridis terhadap Kekerasan Siber", "Penyelesaian Sengketa Tanah Adat", "Aspek Hukum Kontrak Elektronik"],
+    "Skripsi Kesehatan": ["Hubungan Pola Tidur dengan Prestasi Belajar Mahasiswa", "Efektivitas Telemedicine di Daerah Terpencil", "Analisis Faktor Risiko Stunting pada Balita"],
+    "Tesis S2": ["Model Prediktif Kepailitan Perusahaan dengan Ensemble Learning", "Transformasi Digital pada Birokrasi Pemerintahan", "Analisis Wacana Kritis pada Pemberitaan Media"]
+  },
+  "Sertifikasi Profesi dan IT": {
+    "Sertifikasi Cloud dan IT": ["AWS Certified Solutions Architect", "Google Cloud Professional", "Microsoft Azure Fundamentals", "Cisco CCNA", "CompTIA Security+", "Certified Ethical Hacker CEH"],
+    "Sertifikasi Bisnis dan Manajemen": ["Certified Public Accountant CPA", "Chartered Financial Analyst CFA", "Project Management Professional PMP", "Certified ScrumMaster CSM", "Six Sigma Green Belt"],
+    "Sertifikasi Bahasa": ["TOEFL iBT", "IELTS Academic", "JLPT N1 N5", "HSK Tingkat 1-6", "DELE Spanyol", "Goethe Zertifikat"],
+    "Sertifikasi Medis": ["Surat Tanda Registrasi STR", "Surat Izin Praktik SIP", "Advanced Cardiac Life Support ACLS", "Sertifikasi Dokter Spesialis"],
+    "Sertifikasi K3 dan Lingkungan": ["Ahli K3 Umum", "ISO 9001 Quality Management", "ISO 14001 Environmental", "ISO 45001 Occupational Health"]
   }
