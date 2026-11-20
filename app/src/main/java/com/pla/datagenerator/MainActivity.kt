@@ -39,6 +39,30 @@ class MainActivity : AppCompatActivity() {
     private var currentSubKategoriList: List<String> = emptyList()
     private var currentDetailList: List<String> = emptyList()
 
+    // Daftar inti untuk diperluas otomatis menjadi ratusan pilihan
+    private val daftarInti = listOf(
+        "Matematika", "Fisika", "Kimia", "Biologi", "Astronomi", "Geografi",
+        "Sejarah Indonesia", "Sejarah Dunia", "Pancasila", "Ekonomi", "Akuntansi",
+        "Bahasa Indonesia", "Bahasa Inggris", "Bahasa Arab", "Bahasa Jawa", "Bahasa Sunda",
+        "Sastra", "Puisi", "Filsafat", "Psikologi", "Sosiologi", "Antropologi",
+        "Hukum", "Politik", "Pemerintahan", "Kewarganegaraan",
+        "Islam", "Hadits", "Tafsir", "Kristen", "Hindu", "Buddha",
+        "Kesehatan", "Kedokteran", "Gizi", "Olahraga", "Kebugaran", "Kesehatan Mental",
+        "Teknologi", "Komputer", "Internet", "Kecerdasan Buatan", "Robotika",
+        "Pemrograman", "Kotlin", "Python", "JavaScript", "Database", "Jaringan Komputer",
+        "Bisnis", "Pemasaran", "Manajemen", "Kewirausahaan", "UMKM", "Investasi",
+        "Seni Rupa", "Musik", "Tari", "Teater", "Fotografi", "Desain",
+        "Masakan", "Resep Nusantara", "Pertanian", "Peternakan", "Perikanan",
+        "Lingkungan", "Iklim", "Energi Terbarukan", "Bencana Alam",
+        "Parenting", "Pendidikan", "Metode Belajar", "Motivasi", "Produktivitas",
+        "Komunikasi", "Kepemimpinan", "Negosiasi", "Public Speaking",
+        "Wisata Indonesia", "Wisata Dunia", "Transportasi", "Arsitektur",
+        "Otomotif", "Elektronika", "Konstruksi", "Pertambangan", "Kelautan",
+        "Kedokteran Gigi", "Farmasi", "Keperawatan", "Kebidanan",
+        "Jurnalistik", "Media Sosial", "Periklanan", "Hubungan Masyarakat",
+        "Mode dan Fashion", "Kecantikan", "Kerajinan Tangan", "Fotografi Produk"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding!!.root)
         } catch (e: Exception) {
-            // JIKA TAMPILAN ERROR, TAMPILKAN PESAN DI LAYAR
             tampilkanErrorDiLayar("Gagal memuat tampilan (Layout XML error):\n\n${e.message}\n\nPastikan file activity_main.xml sudah benar.")
             return
         }
@@ -63,10 +86,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Memperluas daftar inti jadi ratusan pilihan: "X", "X - Dasar", "X - Menengah", ...
+    private fun perluasDaftar(inti: List<String>): List<String> {
+        val hasil = mutableListOf<String>()
+        val variasi = listOf("", "Dasar", "Menengah", "Lanjutan", "Contoh Soal", "Istilah Penting", "Tokoh dan Sejarah")
+        for (item in inti) {
+            for (v in variasi) {
+                hasil.add(if (v.isEmpty()) item else "$item - $v")
+            }
+        }
+        return hasil
+    }
+
     private fun prosesGenerate() {
         val apiKey = binding?.edtApiKey?.text.toString().trim()
         val manual = binding?.edtManual?.text.toString().trim()
-        val jumlah = binding?.edtJumlah?.text.toString().toIntOrNull() ?: 50
+        val jumlah = (binding?.edtJumlah?.text.toString().toIntOrNull() ?: 50).coerceIn(1, 300)
 
         val topikFinal = if (manual.isNotEmpty()) {
             manual
@@ -83,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding?.btnGenerate?.isEnabled = false
-        binding?.tvStatus?.text = "Menghubungi Gemini...\nTopik: $topikFinal"
+        binding?.tvStatus?.text = "Menghubungi Gemini...\nTopik: $topikFinal\nJumlah: $jumlah tanya-jawab"
 
         lifecycleScope.launch {
             val result = generateJson(apiKey, topikFinal, jumlah)
@@ -94,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                 saveToDownloads(fileName, result)
                 binding?.tvStatus?.text = "Berhasil!\nTersimpan di Download:\n$fileName"
             } else {
-                binding?.tvStatus?.text = "Gagal. Cek API Key/Internet."
+                binding?.tvStatus?.text = "Gagal. Cek API Key/Internet.\nKalau jumlah 300 gagal, coba 100 dulu."
             }
             binding?.btnGenerate?.isEnabled = true
         }
@@ -104,8 +139,10 @@ class MainActivity : AppCompatActivity() {
         val jsonString = assets.open("katalog_topik.json").bufferedReader().use { it.readText() }
         katalog = JSONObject(jsonString)
 
+        // Spinner 1: kunci katalog + ratusan topik hasil perluasan
         val kategoriList = mutableListOf<String>()
         katalog.keys().forEach { kategoriList.add(it) }
+        kategoriList.addAll(perluasDaftar(daftarInti))
 
         if (kategoriList.isEmpty()) {
             Toast.makeText(this, "Katalog JSON kosong.", Toast.LENGTH_SHORT).show()
@@ -119,9 +156,14 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
                 try {
                     val katTerpilih = kategoriList[position]
-                    val subObj = katalog.getJSONObject(katTerpilih)
-
-                    currentSubKategoriList = subObj.keys().asSequence().toList()
+                    if (katalog.has(katTerpilih)) {
+                        // Pilihan dari file JSON
+                        val subObj = katalog.getJSONObject(katTerpilih)
+                        currentSubKategoriList = subObj.keys().asSequence().toList()
+                    } else {
+                        // Pilihan hasil perluasan -> sub & detail dibuat otomatis
+                        currentSubKategoriList = listOf("Umum", "Konsep", "Contoh", "Latihan")
+                    }
                     val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
                     binding?.spinnerSub?.adapter = adapter2
                 } catch (e: Exception) {
@@ -134,16 +176,18 @@ class MainActivity : AppCompatActivity() {
         binding?.spinnerSub?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
                 try {
-                    if (position >= 0 && position < currentSubKategoriList.size) {
-                        val katTerpilih = binding?.spinnerKategori?.selectedItem.toString()
-                        val subTerpilih = currentSubKategoriList[position]
-
-                        val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
-                        currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
-
-                        val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
-                        binding?.spinnerDetail?.adapter = adapter3
+                    val katTerpilih = binding?.spinnerKategori?.selectedItem.toString()
+                    if (katalog.has(katTerpilih)) {
+                        if (position >= 0 && position < currentSubKategoriList.size) {
+                            val subTerpilih = currentSubKategoriList[position]
+                            val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
+                            currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
+                        }
+                    } else {
+                        currentDetailList = listOf("Penjelasan", "Tanya Jawab", "Ringkasan", "Studi Kasus")
                     }
+                    val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
+                    binding?.spinnerDetail?.adapter = adapter3
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -152,7 +196,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Fungsi khusus untuk menampilkan pesan error di layar
     private fun tampilkanErrorDiLayar(pesanError: String) {
         val scrollView = ScrollView(this)
         val linearLayout = LinearLayout(this)
@@ -174,8 +217,8 @@ class MainActivity : AppCompatActivity() {
     private suspend fun generateJson(apiKey: String, topik: String, count: Int): String? = withContext(Dispatchers.IO) {
         try {
             val url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$apiKey"
-            val sysPrompt = "Anda adalah generator JSON. Balas HANYA dengan JSON Array murni tanpa markdown. Format: [{\"id\": 1, \"topik\": \"$topik\", \"kategori\": \"...\", \"isi\": \"...\"}]"
-            val fullPrompt = "Buatkan $count baris data untuk topik: $topik."
+            val sysPrompt = "Anda adalah generator dataset tanya-jawab dalam Bahasa Indonesia untuk melatih AI. Balas HANYA JSON Array murni tanpa markdown. Format: [{\"id\": 1, \"topik\": \"$topik\", \"pertanyaan\": \"...\", \"jawaban\": \"...\"}]"
+            val fullPrompt = "Buatkan $count pasang tanya-jawab yang edukatif, bervariasi, dan tidak berulang untuk topik: $topik. Jawaban jelas dan lengkap, 2-4 kalimat."
 
             val jsonBody = JSONObject()
             val contents = JSONArray()
@@ -188,7 +231,6 @@ class MainActivity : AppCompatActivity() {
             contents.put(content)
             jsonBody.put("contents", contents)
 
-            // Paksa model membalas JSON murni
             val genConfig = JSONObject()
             genConfig.put("responseMimeType", "application/json")
             jsonBody.put("generationConfig", genConfig)
