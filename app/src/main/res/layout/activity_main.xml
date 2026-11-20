@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pabrik Data AI (JSON)"
+            android:text="Pabrik Data AI (v2.0)"
             android:textColor="#4CAF50"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hasilkan data pelatihan secara otomatis dan simpan langsung ke folder Download."
+            android:text="Pilih dari Katalog atau ketik manual."
             android:textColor="#AAAAAA"
             android:layout_marginBottom="24dp" />
 
@@ -36,16 +36,67 @@
             android:backgroundTint="#4CAF50"
             android:layout_marginBottom="16dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Pilih Kategori Utama:"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
+        <Spinner
+            android:id="@+id/spinnerKategori"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Pilih Sub-Kategori:"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
+        <Spinner
+            android:id="@+id/spinnerSub"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Pilih Detail Topik:"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
+        <Spinner
+            android:id="@+id/spinnerDetail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atau Ketik Topik Manual (opsional):"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
         <EditText
-            android:id="@+id/edtPrompt"
+            android:id="@+id/edtManual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Topik (Misal: Hadits Arab, Coding Kotlin)"
+            android:hint="Misal: Hadits Tentang Sabar"
             android:textColor="#FFFFFF"
             android:textColorHint="#777777"
             android:backgroundTint="#4CAF50"
             android:layout_marginBottom="16dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jumlah Baris Data:"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="4dp" />
         <EditText
             android:id="@+id/edtJumlah"
             android:layout_width="match_parent"
@@ -60,7 +111,7 @@
             android:id="@+id/btnGenerate"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Generate &amp; Unduh JSON" />
+            android:text="Generate &amp; Simpan JSON" />
 
         <TextView
             android:id="@+id/tvStatus"
