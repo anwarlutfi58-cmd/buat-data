@@ -35,4 +35,160 @@
     "Jawaban Sedang": ["2-3 Kalimat", "Dengan Contoh", "Dengan Analogi"],
     "Jawaban Lengkap": ["Paragraf Penjelas", "Langkah demi Langkah", "Dengan Fakta dan Angka", "Dengan Kesimpulan"]
   }
+  ,
+  "Bahasa Dunia": {
+    "Bahasa Inggris": ["Grammar", "Tenses", "Vocabulary", "Idioms", "Conversation", "Business English", "IELTS", "TOEFL", "Phrasal Verbs", "Pronunciation"],
+    "Bahasa Arab": ["Nahwu", "Shorof", "Mufradat", "Percakapan", "Terjemahan", "Kaligrafi", "Balaghah"],
+    "Bahasa Mandarin": ["Hanzi", "Pinyin", "Tata Bahasa", "HSK 1-6", "Percakapan", "Chengyu"],
+    "Bahasa Jepang": ["Hiragana", "Katakana", "Kanji", "Keigo", "JLPT N5-N1", "Percakapan"],
+    "Bahasa Korea": ["Hangul", "Tata Bahasa", "TOPIK", "Percakapan", "Drama Korea"],
+    "Bahasa Prancis": ["Tata Bahasa", "Kosakata", "Percakapan", "DELF"],
+    "Bahasa Jerman": ["Tata Bahasa", "Kosakata", "Percakapan", "Goethe Zertifikat"],
+    "Bahasa Spanyol": ["Tata Bahasa", "Kosakata", "Percakapan", "DELE"],
+    "Bahasa Daerah": ["Jawa Krama", "Sunda Lemes", "Bali", "Minang", "Batak", "Bugis", "Madura", "Aceh", "Papua"]
+  },
+  "Sains Lanjut": {
+    "Matematika Lanjut": ["Kalkulus", "Matriks", "Trigonometri", "Peluang", "Kombinatorika", "Teori Bilangan", "Persamaan Diferensial"],
+    "Fisika Lanjut": ["Relativitas", "Fisika Kuantum", "Nuklir", "Partikel", "Astrofisika", "Fluida"],
+    "Kimia Lanjut": ["Termokimia", "Elektrokimia", "Polimer", "Biokimia", "Analitik", "Koloid"],
+    "Biologi Lanjut": ["Mikrobiologi", "Bioteknologi", "Anatomi", "Fisiologi", "Taksonomi", "Ekologi Lanjut"],
+    "Ilmu Bumi": ["Geologi", "Meteorologi", "Oseanografi", "Vulkanologi", "Paleontologi", "Seismologi"]
+  },
+  "Teknologi Lanjut": {
+    "Kecerdasan Buatan": ["Machine Learning", "Deep Learning", "Neural Network", "Computer Vision", "NLP", "Prompt Engineering", "Dataset Training", "Evaluasi Model"],
+    "Pemrograman": ["Kotlin", "Python", "JavaScript", "Java", "C++", "Go", "Rust", "PHP", "Swift", "Dart Flutter"],
+    "Web Development": ["HTML", "CSS", "React", "Vue", "Node.js", "REST API", "GraphQL", "Next.js"],
+    "Mobile Development": ["Android Native", "iOS Swift", "Flutter", "React Native", "Kotlin Multiplatform"],
+    "Database": ["SQL", "MySQL", "PostgreSQL", "MongoDB", "Firebase", "Redis", "Indexing"],
+    "DevOps dan Cloud": ["Docker", "Kubernetes", "AWS", "Google Cloud", "CI CD", "Linux", "Git"],
+    "Keamanan Siber": ["Etical Hacking", "Enkripsi", "Firewall", "Malware", "Phishing", "Forensik Digital"],
+    "Jaringan Komputer": ["TCP IP", "Routing", "DNS", "VPN", "Subnetting", "Wireless"]
+  },
+  "Bisnis dan Keuangan": {
+    "Kewirausahaan": ["Memulai Usaha", "Business Plan", "UMKM", "Franchise", "Startup", "Pitching"],
+    "Pemasaran": ["Digital Marketing", "SEO", "Media Sosial", "Branding", "Copywriting", "Iklan Berbayar"],
+    "Manajemen": ["Kepemimpinan", "SDM", "Operasional", "Strategi", "Pengambilan Keputusan"],
+    "Investasi": ["Saham", "Reksadana", "Obligasi", "Emas", "Properti", "Kripto", "Diversifikasi"],
+    "Akuntansi": ["Jurnal", "Neraca", "Laba Rugi", "Arus Kas", "Perpajakan", "Audit"],
+    "Ekonomi Makro": ["Inflasi", "Suku Bunga", "Kebijakan Moneter", "APBN", "Pertumbuhan Ekonomi", "Pengangguran"]
+  },
+  "Kesehatan dan Medis": {
+    "Kedokteran Umum": ["Anatomi Tubuh", "Sistem Organ", "Penyakit Umum", "Diagnosis", "Obat-obatan"],
+    "Gizi dan Diet": ["Makronutrien", "Mikronutrien", "Menu Seimbang", "Diet Sehat", "Kalori"],
+    "Kebugaran": ["Pemanasan", "Latihan Kekuatan", "Kardio", "Stretching", "Program Latihan"],
+    "Kesehatan Mental": ["Stres", "Kecemasan", "Depresi", "Mindfulness", "Terapi", "Tidur Berkualitas"],
+    "Keperawatan": ["Perawatan Pasien", "Tanda Vital", "Pertolongan Pertama", "Etika Perawat"],
+    "Farmasi": ["Jenis Obat", "Dosis", "Interaksi Obat", "Herbal", "Suplemen"],
+    "Kesehatan Ibu Anak": ["Kehamilan", "Persalinan", "ASI", "Imunisasi", "Tumbuh Kembang"]
+  },
+  "Seni dan Kreativitas": {
+    "Seni Rupa": ["Menggambar", "Melukis", "Warna", "Komposisi", "Perspektif", "Sketsa", "Digital Art"],
+    "Musik": ["Notasi", "Gitar", "Piano", "Vokal", "Aransemen", "Genre Musik", "Produksi Musik"],
+    "Tari": ["Tari Tradisional", "Tari Modern", "Koreografi", "Balet", "Hip Hop"],
+    "Sastra": ["Puisi", "Cerpen", "Novel", "Naskah Drama", "Penulisan Kreatif", "Editing"],
+    "Desain": ["Desain Grafis", "UI UX", "Tipografi", "Logo", "Photoshop", "Illustrator", "Figma"],
+    "Fotografi": ["Komposisi", "Pencahayaan", "Portrait", "Landscape", "Editing Foto"],
+    "Film dan Video": ["Sinematografi", "Editing Video", "Storyboard", "Penulisan Naskah", "Animasi"]
+  },
+  "Masakan dan Kuliner": {
+    "Masakan Nusantara": ["Rendang", "Soto", "Nasi Goreng", "Gudeg", "Pempek", "Rawon", "Sate"],
+    "Masakan Dunia": ["Italia", "Jepang", "Korea", "China", "India", "Arab", "Meksiko"],
+    "Kue dan Pastry": ["Roti", "Kue Basah", "Kue Kering", "Cake", "Donat", "Puding"],
+    "Minuman": ["Kopi", "Teh", "Jamu", "Smoothie", "Mocktail", "Es Campur"],
+    "Teknik Memasak": ["Menumis", "Merebus", "Mengukus", "Memanggang", "Menggoreng", "Fermentasi"]
+  },
+  "Pertanian dan Alam": {
+    "Pertanian": ["Padi", "Sayuran", "Buah-buahan", "Pupuk", "Irigasi", "Hidroponik", "Organik"],
+    "Peternakan": ["Ayam", "Sapi", "Kambing", "Lele", "Pakan", "Kandang"],
+    "Perkebunan": ["Kelapa Sawit", "Karet", "Kopi", "Kakao", "Teh", "Cengkeh"],
+    "Perikanan": ["Budidaya Ikan", "Tambak", "Pakan Ikan", "Akuarium", "Penangkapan"],
+    "Kehutanan": ["Reboisasi", "Hasil Hutan", "Konservasi", "Kayu", "Madu Hutan"]
+  },
+  "Parenting dan Pendidikan": {
+    "Tumbuh Kembang": ["Bayi", "Balita", "Anak Usia Dini", "Remaja", "Milestone"],
+    "Pola Asuh": ["Disiplin Positif", "Komunikasi Anak", "Tantrum", "Screen Time", "Kemandirian"],
+    "Pendidikan Karakter": ["Jujur", "Tanggung Jawab", "Empati", "Kerja Sama", "Percaya Diri"],
+    "Metode Belajar": ["Membaca Efektif", "Menghafal", "Mind Map", "Belajar Aktif", "Manajemen Waktu"],
+    "Pendidikan Formal": ["PAUD", "SD", "SMP", "SMA", "Kurikulum", "Homeschooling"]
+  },
+  "Psikologi dan Pengembangan Diri": {
+    "Psikologi Dasar": ["Kepribadian", "Emosi", "Persepsi", "Memori", "Motivasi", "Perilaku"],
+    "Pengembangan Diri": ["Goal Setting", "Kebiasaan Baik", "Disiplin", "Percaya Diri", "Resiliensi"],
+    "Komunikasi": ["Public Speaking", "Mendengar Aktif", "Negosiasi", "Persuasi", "Bahasa Tubuh"],
+    "Karier": ["CV dan Lamaran", "Wawancara Kerja", "Networking", "Promosi", "Pindah Karier"],
+    "Hubungan Sosial": ["Pertemanan", "Keluarga", "Pasangan", "Konflik", "Batasan Sehat"]
+  },
+  "Hukum dan Pemerintahan": {
+    "Hukum Pidana": ["Tindak Pidana", "Proses Pengadilan", "Sanksi", "KUHP", "Hak Tersangka"],
+    "Hukum Perdata": ["Perjanjian", "Waris", "Perkawinan", "Ganti Rugi", "Sengketa"],
+    "Hukum Bisnis": ["Kontrak", "Merek Dagang", "Hak Cipta", "Paten", "Perseroan"],
+    "Pemerintahan": ["Struktur Negara", "DPR MPR", "Pemilu", "Otonomi Daerah", "ASN"],
+    "Hukum Internasional": ["PBB", "Perjanjian Internasional", "Hak Asasi Manusia", "Hukum Laut"]
+  },
+  "Sejarah dan Peradaban": {
+    "Peradaban Kuno": ["Mesir Kuno", "Yunani Kuno", "Romawi", "Mesopotamia", "Maya", "China Kuno"],
+    "Sejarah Asia": ["Dinasti China", "Samurai Jepang", "Kerajaan India", "Khmer", "Majapahit", "Sriwijaya"],
+    "Sejarah Eropa": ["Abad Pertengahan", "Renaissance", "Revolusi Prancis", "Penjelajahan Samudra"],
+    "Perang Besar": ["Perang Dunia 1", "Perang Dunia 2", "Perang Dingin", "Perang Vietnam", "Perang Saudara"],
+    "Tokoh Sejarah": ["Nabi dan Rasul", "Filsuf", "Penemu", "Jenderal", "Reformator"]
+  },
+  "Geografi dan Wisata": {
+    "Wisata Indonesia": ["Bali", "Yogyakarta", "Labuan Bajo", "Raja Ampat", "Bromo", "Danau Toba", "Borobudur"],
+    "Wisata Dunia": ["Eropa", "Asia Timur", "Timur Tengah", "Amerika", "Afrika", "Australia"],
+    "Keajaiban Alam": ["Gunung", "Air Terjun", "Gua", "Pantai", "Hutan", "Danau", "Gurun"],
+    "Geografi Fisik": ["Iklim", "Cuaca", "Benua", "Samudra", "Lempeng Tektonik", "Siklus Air"],
+    "Transportasi": ["Penerbangan", "Kereta Api", "Kapal Laut", "Logistik", "Navigasi"]
+  },
+  "Olahraga Lengkap": {
+    "Sepak Bola": ["Aturan", "Posisi", "Formasi", "Liga Dunia", "Teknik", "Taktik", "Wasit"],
+    "Bulu Tangkis": ["Aturan", "Servis", "Smash", "Footwork", "Tokoh Indonesia"],
+    "Basket": ["Aturan", "Dribble", "Shooting", "Posisi", "NBA"],
+    "Bela Diri": ["Pencak Silat", "Karate", "Taekwondo", "Judo", "Silat", "Muay Thai", "Boxing"],
+    "Olahraga Air": ["Renang", "Selam", "Selancar", "Dayung", "Polo Air"],
+    "Atletik": ["Lari", "Lompat", "Lempar", "Maraton", "Estafet"],
+    "Olahraga Lain": ["Voli", "Tenis", "Golf", "Panahan", "Angkat Besi", "Balap", "Esports"]
+  },
+  "Agama dan Spiritual": {
+    "Islam Dasar": ["Rukun Islam", "Rukun Iman", "Syahadat", "Salat", "Puasa", "Zakat", "Haji"],
+    "Fiqih": ["Thaharah", "Salat Jamaah", "Puasa Sunnah", "Muamalah", "Waris Islam", "Nikah"],
+    "Hadits dan Tafsir": ["Hadits Shahih", "Asbabun Nuzul", "Tafsir Surah Pendek", "Kisah Quran"],
+    "Sejarah Islam": ["Khulafaur Rasyidin", "Dinasti Umayyah", "Abbasiyah", "Wali Songo", "Peradaban Islam"],
+    "Kristen": ["Kisah Alkitab", "Ajaran Yesus", "Tokoh Alkitab", "Perjanjian Lama", "Perjanjian Baru"],
+    "Hindu": ["Dharma", "Karma", "Dewa Dewi", "Kisah Ramayana", "Upacara Hindu"],
+    "Buddha": ["Empat Kebenaran", "Jalan Mulia", "Kisah Sang Buddha", "Meditasi"]
+  },
+  "Lingkungan dan Energi": {
+    "Isu Lingkungan": ["Pemanasan Global", "Polusi", "Deforestasi", "Sampah Plastik", "Kepunahan Spesies"],
+    "Energi Terbarukan": ["Tenaga Surya", "Angin", "Air", "Panas Bumi", "Biomassa", "Panel Surya"],
+    "Konservasi": ["Daur Ulang", "Hemat Energi", "Taman Nasional", "Satwa Langka", "Reboisasi"],
+    "Bencana Alam": ["Gempa", "Gunung Meletus", "Banjir", "Tsunami", "Longsor", "Kekeringan", "Mitigasi"]
+  },
+  "Otomotif dan Teknik": {
+    "Mobil": ["Mesin Mobil", "Transmisi", "Perawatan", "Listrik Mobil", "Rem", "Suspensi"],
+    "Motor": ["Mesin Motor", "Karburator", "Injeksi", "Perawatan Motor", "Modifikasi"],
+    "Teknik Mesin": ["Termodinamika", "Material", "CAD", "Manufaktur", "Robotika"],
+    "Teknik Sipil": ["Bangunan", "Jembatan", "Beton", "Struktur", "Konstruksi"],
+    "Teknik Elektro": ["Rangkaian", "Elektronika", "Mikrokontroler", "Arduino", "IoT"],
+    "Penerbangan": ["Prinsip Terbang", "Navigasi Udara", "Bandara", "Pesawat", "Drone"]
+  },
+  "Media dan Jurnalistik": {
+    "Jurnalistik": ["Berita", "Wawancara", "Reportase", "Kode Etik", "Judul Berita", "5W 1H"],
+    "Media Sosial": ["Instagram", "TikTok", "YouTube", "Twitter X", "Konten Kreator", "Algoritma"],
+    "Periklanan": ["Iklan Digital", "Brand Awareness", "Campaign", "Target Audiens", "Analitik"],
+    "Hubungan Masyarakat": ["Press Release", "Citra Perusahaan", "Manajemen Krisis", "Event"],
+    "Broadcasting": ["Penyiaran", "Podcast", "Radio", "Televisi", "Voice Over"]
+  },
+  "Mode dan Gaya Hidup": {
+    "Fashion": ["Padu Padan", "Warna", "Gaya Klasik", "Streetwear", "Busana Muslim", "Batik"],
+    "Kecantikan": ["Perawatan Kulit", "Makeup", "Rambut", "Skincare Routine", "Parfum"],
+    "Interior": ["Dekorasi Rumah", "Minimalis", "Pencahayaan", "Furnitur", "Warna Ruangan"],
+    "Hobi": ["Berkebun", "Memancing", "Koleksi", "Kerajinan Tangan", "Board Game", "Traveling"],
+    "Etika dan Sopan Santun": ["Tata Krama", "Etika Makan", "Etika Kerja", "Pergaulan", "Ucapan"]
+  },
+  "Format Jawaban": {
+    "Singkat": ["1 Kalimat", "Poin-poin", "Definisi Padat", "Ya atau Tidak dengan Alasan"],
+    "Sedang": ["2-3 Kalimat", "Dengan Contoh", "Dengan Analogi", "Sebab Akibat"],
+    "Panjang": ["Paragraf Penjelas", "Langkah demi Langkah", "Dengan Fakta dan Angka", "Dengan Kesimpulan", "Pro dan Kontra"],
+    "Gaya Khusus": ["Bahasa Santai", "Bahasa Formal", "Untuk Anak", "Untuk Pemula", "Studi Kasus"]
+  }
 }
