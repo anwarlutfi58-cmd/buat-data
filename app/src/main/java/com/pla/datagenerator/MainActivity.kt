@@ -1,12 +1,17 @@
 package com.pla.datagenerator
 
 import android.content.ContentValues
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.Gravity
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -24,7 +29,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding? = null
     private val client = OkHttpClient.Builder()
         .connectTimeout(180, TimeUnit.SECONDS)
         .readTimeout(180, TimeUnit.SECONDS)
@@ -36,113 +41,134 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
         try {
             binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+            setContentView(binding!!.root)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error Layout: ${e.message}", Toast.LENGTH_LONG).show()
-            finish()
+            // JIKA TAMPILAN ERROR, TAMPILKAN PESAN DI LAYAR
+            tampilkanErrorDiLayar("Gagal memuat tampilan (Layout XML error):\n\n${e.message}\n\nPastikan file activity_main.xml sudah benar.")
             return
         }
 
-        muatKatalog()
+        try {
+            muatKatalog()
+        } catch (e: Exception) {
+            tampilkanErrorDiLayar("Gagal memuat katalog JSON:\n\n${e.message}\n\nPastikan file katalog_topik.json ada di folder app/src/main/assets/")
+            return
+        }
 
-        binding.btnGenerate.setOnClickListener {
-            val apiKey = binding.edtApiKey.text.toString().trim()
-            val manual = binding.edtManual.text.toString().trim()
-            val jumlah = binding.edtJumlah.text.toString().toIntOrNull() ?: 50
+        binding?.btnGenerate?.setOnClickListener {
+            prosesGenerate()
+        }
+    }
 
-            val topikFinal = if (manual.isNotEmpty()) {
-                manual
+    private fun prosesGenerate() {
+        val apiKey = binding?.edtApiKey?.text.toString().trim()
+        val manual = binding?.edtManual?.text.toString().trim()
+        val jumlah = binding?.edtJumlah?.text.toString().toIntOrNull() ?: 50
+
+        val topikFinal = if (manual.isNotEmpty()) {
+            manual
+        } else {
+            val kategori = binding?.spinnerKategori?.selectedItem?.toString() ?: ""
+            val sub = binding?.spinnerSub?.selectedItem?.toString() ?: ""
+            val detail = binding?.spinnerDetail?.selectedItem?.toString() ?: ""
+            "$kategori $sub - $detail"
+        }
+
+        if (apiKey.isEmpty() || topikFinal.isEmpty() || topikFinal == "  - ") {
+            Toast.makeText(this, "Isi API Key dan Topik!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        binding?.btnGenerate?.isEnabled = false
+        binding?.tvStatus?.text = "Menghubungi Gemini...\nTopik: $topikFinal"
+
+        lifecycleScope.launch {
+            val result = generateJson(apiKey, topikFinal, jumlah)
+            if (result != null) {
+                binding?.tvStatus?.text = "Menyimpan..."
+                val safeName = topikFinal.replace(" ", "_").replace("/", "_").take(20)
+                val fileName = "data_${safeName}_${System.currentTimeMillis()}.json"
+                saveToDownloads(fileName, result)
+                binding?.tvStatus?.text = "Berhasil!\nTersimpan di Download:\n$fileName"
             } else {
-                val kategori = binding.spinnerKategori.selectedItem?.toString() ?: ""
-                val sub = binding.spinnerSub.selectedItem?.toString() ?: ""
-                val detail = binding.spinnerDetail.selectedItem?.toString() ?: ""
-                "$kategori $sub - $detail"
+                binding?.tvStatus?.text = "Gagal. Cek API Key/Internet."
             }
-
-            if (apiKey.isEmpty() || topikFinal.isEmpty() || topikFinal == "  - ") {
-                Toast.makeText(this, "Isi API Key dan Topik!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            binding.btnGenerate.isEnabled = false
-            binding.tvStatus.text = "Menghubungi Gemini...\nTopik: $topikFinal"
-
-            lifecycleScope.launch {
-                val result = generateJson(apiKey, topikFinal, jumlah)
-                if (result != null) {
-                    binding.tvStatus.text = "Menyimpan..."
-                    val safeName = topikFinal.replace(" ", "_").replace("/", "_").take(20)
-                    val fileName = "data_${safeName}_${System.currentTimeMillis()}.json"
-                    saveToDownloads(fileName, result)
-                    binding.tvStatus.text = "Berhasil!\nTersimpan di Download:\n$fileName"
-                } else {
-                    binding.tvStatus.text = "Gagal. Cek API Key/Internet."
-                }
-                binding.btnGenerate.isEnabled = true
-            }
+            binding?.btnGenerate?.isEnabled = true
         }
     }
 
     private fun muatKatalog() {
-        try {
-            // Membaca file dari folder assets
-            val jsonString = assets.open("katalog_topik.json").bufferedReader().use { it.readText() }
-            katalog = JSONObject(jsonString)
+        val jsonString = assets.open("katalog_topik.json").bufferedReader().use { it.readText() }
+        katalog = JSONObject(jsonString)
 
-            val kategoriList = mutableListOf<String>()
-            katalog.keys().forEach { kategoriList.add(it) }
+        val kategoriList = mutableListOf<String>()
+        katalog.keys().forEach { kategoriList.add(it) }
 
-            if (kategoriList.isEmpty()) {
-                Toast.makeText(this, "Katalog JSON kosong.", Toast.LENGTH_SHORT).show()
-                return
-            }
-
-            val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, kategoriList)
-            binding.spinnerKategori.adapter = adapter1
-
-            binding.spinnerKategori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                    try {
-                        val katTerpilih = kategoriList[position]
-                        val subObj = katalog.getJSONObject(katTerpilih)
-                        
-                        currentSubKategoriList = subObj.keys().asSequence().toList()
-                        val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
-                        binding.spinnerSub.adapter = adapter2
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-
-            binding.spinnerSub.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                    try {
-                        if (position >= 0 && position < currentSubKategoriList.size) {
-                            val katTerpilih = binding.spinnerKategori.selectedItem.toString()
-                            val subTerpilih = currentSubKategoriList[position]
-                            
-                            val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
-                            currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
-                            
-                            val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
-                            binding.spinnerDetail.adapter = adapter3
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-
-        } catch (e: Exception) {
-            // Jika file tidak ketemu atau format salah, aplikasi TIDAK akan crash.
-            Toast.makeText(this, "Gagal memuat katalog. Pastikan file JSON ada di folder assets.", Toast.LENGTH_LONG).show()
-            e.printStackTrace()
+        if (kategoriList.isEmpty()) {
+            Toast.makeText(this, "Katalog JSON kosong.", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, kategoriList)
+        binding?.spinnerKategori?.adapter = adapter1
+
+        binding?.spinnerKategori?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
+                try {
+                    val katTerpilih = kategoriList[position]
+                    val subObj = katalog.getJSONObject(katTerpilih)
+                    
+                    currentSubKategoriList = subObj.keys().asSequence().toList()
+                    val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
+                    binding?.spinnerSub?.adapter = adapter2
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        binding?.spinnerSub?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
+                try {
+                    if (position >= 0 && position < currentSubKategoriList.size) {
+                        val katTerpilih = binding?.spinnerKategori?.selectedItem.toString()
+                        val subTerpilih = currentSubKategoriList[position]
+                        
+                        val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
+                        currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
+                        
+                        val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
+                        binding?.spinnerDetail?.adapter = adapter3
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    // Fungsi khusus untuk menampilkan pesan error di layar
+    private fun tampilkanErrorDiLayar(pesanError: String) {
+        val scrollView = ScrollView(this)
+        val linearLayout = LinearLayout(this)
+        linearLayout.orientation = LinearLayout.VERTICAL
+        linearLayout.setPadding(32, 32, 32, 32)
+        linearLayout.setBackgroundColor(Color.BLACK)
+
+        val tv = TextView(this)
+        tv.text = pesanError
+        tv.setTextColor(Color.RED)
+        tv.textSize = 16f
+        tv.gravity = Gravity.START
+
+        linearLayout.addView(tv)
+        scrollView.addView(linearLayout)
+        setContentView(scrollView)
     }
 
     private suspend fun generateJson(apiKey: String, topik: String, count: Int): String? = withContext(Dispatchers.IO) {
