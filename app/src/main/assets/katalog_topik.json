@@ -1,10 +1,38 @@
 {
-  "Pemrograman": {
-    "Kotlin": ["Variabel", "Fungsi", "Class", "Coroutines"],
-    "HTML": ["Struktur Dasar", "Form", "Tabel"]
+  "Indonesia": {
+    "Bahasa Indonesia": ["Tata Bahasa", "Ejaan PUEBI", "Pantun", "Puisi", "Cerpen", "Pidato", "Surat Resmi", "Peribahasa", "Sinonim Antonim", "Majas", "Paragraf", "Kalimat Efektif"],
+    "Sejarah Indonesia": ["Kerajaan Nusantara", "Kolonialisme", "Pergerakan Nasional", "Proklamasi", "Orde Lama", "Orde Baru", "Reformasi", "Pahlawan Nasional"],
+    "Geografi Indonesia": ["Provinsi dan Ibu Kota", "Gunung", "Sungai dan Danau", "Pulau", "Budaya Daerah", "Pariwisata", "Flora Fauna"],
+    "Pancasila dan UUD": ["Sila Pancasila", "Pembukaan UUD 1945", "Hak dan Kewajiban", "Lembaga Negara", "Lambang Negara"],
+    "Budaya Nusantara": ["Tari Tradisional", "Pakaian Adat", "Rumah Adat", "Senjata Tradisional", "Upacara Adat", "Kuliner Daerah", "Alat Musik Daerah"],
+    "Tokoh Indonesia": ["Presiden RI", "Sastrawan", "Ilmuwan", "Atlet", "Seniman"],
+    "Hukum Indonesia": ["Lalu Lintas", "Perlindungan Konsumen", "Hukum Pidana Dasar", "Hukum Perdata Dasar", "SIM dan Kendaraan"]
   },
-  "Agama": {
-    "Hadits Arab": ["Hadits Niat", "Hadits Sabar"],
-    "Hadits Inggris": ["Hadith Intention", "Hadith Patience"]
+  "Pertanyaan": {
+    "Pengetahuan Umum": ["Ibu Kota Negara", "Tokoh Dunia", "Penemuan Penting", "Rekor Dunia", "Bendera Negara", "Mata Uang"],
+    "Sains Populer": ["Mengapa Langit Biru", "Cara Kerja Vaksin", "Apa Itu Gravitasi", "Gerhana", "Pelangi", "Gempa Bumi"],
+    "Teknologi": ["Cara Kerja Internet", "Apa Itu AI", "Keamanan Password", "Cloud Computing", "Smartphone", "Blockchain"],
+    "Kesehatan": ["Gizi Seimbang", "Olahraga Rutin", "Kesehatan Mental", "Pertolongan Pertama", "Vitamin", "Tidur Sehat"],
+    "Matematika": ["Aritmatika", "Aljabar", "Geometri", "Statistika", "Logika", "Pecahan", "Persamaan"],
+    "Fisika": ["Hukum Newton", "Listrik Magnet", "Optik", "Termodinamika", "Gelombang Bunyi", "Energi"],
+    "Kimia": ["Tabel Periodik", "Reaksi Kimia", "Asam Basa", "Kimia Organik", "Larutan"],
+    "Biologi": ["Sel dan Jaringan", "Fotosintesis", "Sistem Tubuh", "Ekosistem", "Genetika", "Evolusi"],
+    "Astronomi": ["Tata Surya", "Bintang dan Galaksi", "Fase Bulan", "Luar Angkasa", "Planet"],
+    "Ekonomi": ["Inflasi", "Permintaan Penawaran", "Pajak", "Menabung", "Investasi Pemula", "UMKM"],
+    "Agama Islam": ["Rukun Islam", "Rukun Iman", "Fiqih Ibadah", "Sejarah Nabi", "Asmaul Husna", "Doa Harian", "Hadits Pilihan"],
+    "Agama Lain": ["Kisah Alkitab", "Ajaran Kasih", "Dharma", "Kisah Ramayana"],
+    "Pemrograman": ["Kotlin", "Python", "HTML CSS", "JavaScript", "SQL", "AI Machine Learning", "Prompt Engineering"],
+    "Sejarah Dunia": ["Perang Dunia 1", "Perang Dunia 2", "Peradaban Kuno", "Revolusi Industri", "Tokoh Dunia"],
+    "Olahraga": ["Sepak Bola", "Bulu Tangkis", "Basket", "Voli", "Renang", "Pencak Silat"],
+    "Seni": ["Seni Rupa", "Notasi Musik", "Genre Musik", "Teater"],
+    "Gaya Hidup": ["Manajemen Stres", "Mindfulness", "Produktivitas", "Komunikasi"],
+    "Lingkungan": ["Daur Ulang", "Pemanasan Global", "Energi Terbarukan", "Konservasi"],
+    "Parenting": ["Tumbuh Kembang Anak", "Pola Asuh", "Pendidikan Karakter"],
+    "Psikologi": ["Motivasi", "Emosi", "Kebiasaan", "Pengambilan Keputusan"]
+  },
+  "Jawaban": {
+    "Jawaban Singkat": ["1 Kalimat", "Poin-poin", "Definisi Padat"],
+    "Jawaban Sedang": ["2-3 Kalimat", "Dengan Contoh", "Dengan Analogi"],
+    "Jawaban Lengkap": ["Paragraf Penjelas", "Langkah demi Langkah", "Dengan Fakta dan Angka", "Dengan Kesimpulan"]
   }
 }
