@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         try {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding!!.root)
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val katTerpilih = kategoriList[position]
                     val subObj = katalog.getJSONObject(katTerpilih)
-                    
+
                     currentSubKategoriList = subObj.keys().asSequence().toList()
                     val adapter2 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentSubKategoriList)
                     binding?.spinnerSub?.adapter = adapter2
@@ -137,10 +137,10 @@ class MainActivity : AppCompatActivity() {
                     if (position >= 0 && position < currentSubKategoriList.size) {
                         val katTerpilih = binding?.spinnerKategori?.selectedItem.toString()
                         val subTerpilih = currentSubKategoriList[position]
-                        
+
                         val detailArr = katalog.getJSONObject(katTerpilih).getJSONArray(subTerpilih)
                         currentDetailList = (0 until detailArr.length()).map { detailArr.getString(it) }
-                        
+
                         val adapter3 = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, currentDetailList)
                         binding?.spinnerDetail?.adapter = adapter3
                     }
@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity() {
 
     private suspend fun generateJson(apiKey: String, topik: String, count: Int): String? = withContext(Dispatchers.IO) {
         try {
-            val url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey"
+            val url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$apiKey"
             val sysPrompt = "Anda adalah generator JSON. Balas HANYA dengan JSON Array murni tanpa markdown. Format: [{\"id\": 1, \"topik\": \"$topik\", \"kategori\": \"...\", \"isi\": \"...\"}]"
             val fullPrompt = "Buatkan $count baris data untuk topik: $topik."
 
@@ -188,6 +188,11 @@ class MainActivity : AppCompatActivity() {
             contents.put(content)
             jsonBody.put("contents", contents)
 
+            // Paksa model membalas JSON murni
+            val genConfig = JSONObject()
+            genConfig.put("responseMimeType", "application/json")
+            jsonBody.put("generationConfig", genConfig)
+
             val request = Request.Builder()
                 .url(url)
                 .post(jsonBody.toString().toRequestBody("application/json".toMediaType()))
@@ -198,7 +203,12 @@ class MainActivity : AppCompatActivity() {
                 val respBody = response.body?.string() ?: return@withContext null
                 val candidates = JSONObject(respBody).getJSONArray("candidates")
                 if (candidates.length() > 0) {
-                    var text = candidates.getJSONObject(0).getJSONObject("content").getJSONArray("parts").getJSONObject(0).getString("text")
+                    val partsArr = candidates.getJSONObject(0).getJSONObject("content").getJSONArray("parts")
+                    val sb = StringBuilder()
+                    for (i in 0 until partsArr.length()) {
+                        sb.append(partsArr.getJSONObject(i).optString("text", ""))
+                    }
+                    var text = sb.toString()
                     text = text.replace("```json", "").replace("```", "").trim()
                     return@withContext text
                 }
